@@ -7,7 +7,7 @@ export function Input({ ...rest }: IInputProps) {
       h={14}
       size="md"
       borderWidth={0}
-      fontStyle="md"
+      fontSize="md"
       fontFamily="body"
       color="white"
       placeholderTextColor="gray.300"
