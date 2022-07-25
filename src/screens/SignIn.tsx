@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Alert } from 'react-native'
 import auth from '@react-native-firebase/auth'
-import { VStack, Heading, Icon, useTheme } from "native-base"
+import { VStack, Heading, Icon, useTheme, Text } from "native-base"
 import { Envelope, Key } from 'phosphor-react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import Logo from '../assets/logo_primary.svg'
 
@@ -15,6 +16,7 @@ export function SignIn() {
   const [password, setPassword] = useState('')
 
   const { colors } = useTheme()
+  const navigation = useNavigation()
 
   function handleSignIn() {
     if (!email || !password) {
@@ -40,6 +42,10 @@ export function SignIn() {
             return Alert.alert('Entrar', "Hmm, algo está errado.")
         }
       })
+  }
+
+  function handleSignUp() {
+    navigation.navigate('signup')
   }
 
   return (
@@ -69,6 +75,25 @@ export function SignIn() {
         mt={8}
         onPress={handleSignIn}
         isLoading={isLoading}
+      />
+
+
+      <Text
+        fontSize="sm"
+        color={colors.gray[300]}
+        mt={8}
+      >
+        Ainda não é um usuário?
+      </Text>
+
+      <Button
+        title="Registrar"
+        w="full"
+        mt={4}
+        isLoading={isLoading}
+        bg={'amber.700'}
+        _pressed={{ bg: "amber.500" }}
+        onPress={handleSignUp}
       />
     </VStack>
   )
