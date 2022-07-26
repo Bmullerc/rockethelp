@@ -12,7 +12,6 @@ import { Header } from '../components/Header'
 export function SignUp() {
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [pass1, setPass1] = useState('')
   const [pass2, setPass2] = useState('')
 
@@ -24,7 +23,6 @@ export function SignUp() {
     } else if (pass1 !== pass2) {
       return Alert.alert('Registrar', 'Ambos os campos de senha precisam ser iguais.')
     } else if (pass1 === pass2) {
-      setPassword(pass2)
       return true
     }
   }
@@ -43,14 +41,14 @@ export function SignUp() {
     validPassword()
 
     if (validEmail() === true && validPassword() === true) {
-      console.log(email, password)
+      console.log(email, pass1)
       handleSignUp()
     }
   }
 
   function handleSignUp() {
     auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, pass1)
       .then(userCredential => {
         const user = userCredential.user
       })

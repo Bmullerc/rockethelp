@@ -4,7 +4,9 @@ import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
 import { HStack, VStack, IconButton, useTheme, Text, Heading, FlatList, Center } from 'native-base';
-import { SignOut, ChatTeardropText } from 'phosphor-react-native';
+
+import { SignOut, ChatTeardropText, Info } from 'phosphor-react-native';
+
 import { Filter } from '../components/Filter';
 import { Order, OrderProps } from '../components/Order';
 import Logo from '../assets/logo_secondary.svg'
@@ -26,6 +28,10 @@ export function Home() {
 
   function handleOpenDetails(orderId: string) {
     navigation.navigate('details', { orderId })
+  }
+
+  function handleGoInfo() {
+    navigation.navigate('info')
   }
 
   function handleLogout() {
@@ -76,10 +82,19 @@ export function Home() {
       >
         <Logo />
 
-        <IconButton
-          icon={<SignOut size={26} color={colors.gray[300]} />}
-          onPress={handleLogout}
-        />
+        <HStack>
+          <IconButton
+            icon={<Info color={colors.gray[300]} size={24} />}
+            onPress={handleGoInfo}
+          />
+
+          <IconButton
+            icon={<SignOut size={26} color={colors.gray[300]} />}
+            onPress={handleLogout}
+          />
+        </HStack>
+
+
 
       </HStack>
 

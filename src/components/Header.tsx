@@ -1,17 +1,22 @@
 import { Heading, HStack, IconButton, StyledProps, useTheme } from 'native-base';
-import { CaretLeft } from 'phosphor-react-native';
+import { CaretLeft, Info } from 'phosphor-react-native';
 import { useNavigation } from '@react-navigation/native'
 
 type Props = StyledProps & {
   title: string
+  help?: boolean
 }
 
-export function Header({ title, ...rest }: Props) {
+export function Header({ title, help, ...rest }: Props) {
   const { colors } = useTheme()
   const navigation = useNavigation()
 
   function handleGoBack() {
     navigation.goBack()
+  }
+
+  function handleGoInfo() {
+    navigation.navigate('info')
   }
 
   return (
@@ -24,6 +29,7 @@ export function Header({ title, ...rest }: Props) {
       pt={12}
       {...rest}
     >
+
       <IconButton
         icon={<CaretLeft color={colors.gray[200]} size={24} />}
         onPress={handleGoBack}
@@ -32,6 +38,14 @@ export function Header({ title, ...rest }: Props) {
       <Heading color="gray.100" textAlign="center" fontSize="lg" flex={1} ml={-6}>
         {title}
       </Heading>
+
+      {
+        !help && <IconButton
+          icon={<Info color={colors.gray[200]} size={24} />}
+          onPress={handleGoInfo}
+        />
+      }
+
     </HStack>
   );
 }

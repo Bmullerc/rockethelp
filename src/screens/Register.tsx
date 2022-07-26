@@ -16,7 +16,7 @@ export function Register() {
 
   function handleNewOrderRegister() {
     if (!patrimony || !description) {
-      Alert.alert('Registrar', 'Preencha todos os campos.')
+      return Alert.alert('Registrar', 'Preencha todos os campos.')
     }
 
     setIsLoading(true)
