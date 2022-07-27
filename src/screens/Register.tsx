@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { VStack } from 'native-base';
-import firestore from '@react-native-firebase/firestore';
+import firestore, { firebase } from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { Button } from '../components/Button';
@@ -11,6 +11,8 @@ export function Register() {
   const [isLoading, setIsLoading] = useState(false)
   const [patrimony, setPatrimony] = useState('')
   const [description, setDescription] = useState('')
+  
+  const user = firebase.auth().currentUser.email
 
   const navigation = useNavigation()
 
@@ -27,7 +29,8 @@ export function Register() {
         patrimony,
         description,
         status: 'open',
-        created_at: firestore.FieldValue.serverTimestamp()
+        created_at: firestore.FieldValue.serverTimestamp(),
+        createdby: user
       })
       .then(() => {
         Alert.alert("Solicitação", "Solicitação registrada com sucesso.")

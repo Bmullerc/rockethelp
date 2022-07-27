@@ -5,6 +5,7 @@ import { CircleWavyCheck, Hourglass, DesktopTower, ClipboardText } from 'phospho
 
 import firestore from '@react-native-firebase/firestore'
 import { dateFormat } from '../utils/firestoreDateFormat';
+import { firebase, FirebaseAuthTypes } from "@react-native-firebase/auth";
 
 import { Header } from '../components/Header';
 import { OrderProps } from '../components/Order';
@@ -23,6 +24,7 @@ type OrderDetails = OrderProps & {
   description: string
   solution: string
   closed: string
+  createdby?: FirebaseAuthTypes.User
 }
 
 export function Details() {
@@ -31,6 +33,8 @@ export function Details() {
   const [solution, setSolution] = useState('')
 
   const { colors } = useTheme()
+
+  const user = firebase.auth().currentUser.email
 
   const navigation = useNavigation()
   const route = useRoute()
@@ -65,7 +69,7 @@ export function Details() {
       .doc(orderId)
       .get()
       .then(doc => {
-        const { patrimony, description, status, created_at, closed_at, solution } = doc.data()
+        const { patrimony, description, status, created_at, closed_at, solution, createdby } = doc.data()
 
         const closed = closed_at ? dateFormat(closed_at) : null
 
@@ -76,7 +80,8 @@ export function Details() {
           status,
           solution,
           when: dateFormat(created_at),
-          closed
+          closed,
+          createdby
         })
 
         setIsLoading(false)
@@ -121,14 +126,14 @@ export function Details() {
           title='descrição do problema'
           description={order.description}
           icon={ClipboardText}
-          footer={`Registrado em ${order.when}`}
+          footer={`Registrado em ${order.when} \nPor ${order.createdby}`}
         />
 
         <CardDetails
           title='solução'
           icon={CircleWavyCheck}
           description={order.solution}
-          footer={order.closed && `Encerrado em ${order.closed}`}
+          footer={order.closed && `Encerrado em ${order.closed} \nPor ${user}`}
         >
           {
             order.status === 'open' &&

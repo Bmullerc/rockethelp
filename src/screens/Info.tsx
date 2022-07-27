@@ -1,10 +1,8 @@
-import { Text, VStack, useTheme, Heading, ScrollView } from 'native-base';
+import { Text, VStack, Heading, ScrollView } from 'native-base';
 
 import { Header } from '../components/Header';
 
 export function Info() {
-  const { colors } = useTheme()
-
   return (
     <ScrollView>
       <VStack flex={1} p={6} bg="gray.600">

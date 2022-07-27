@@ -77,24 +77,29 @@ export function SignIn() {
         isLoading={isLoading}
       />
 
-
-      <Text
-        fontSize="sm"
-        color={colors.gray[300]}
-        mt={8}
-      >
-        Ainda não é um usuário?
-      </Text>
-
-      <Button
-        title="Registrar"
+      <VStack
         w="full"
-        mt={4}
-        isLoading={isLoading}
-        bg={'amber.700'}
-        _pressed={{ bg: "amber.500" }}
-        onPress={handleSignUp}
-      />
+        alignItems="center"
+        mt={12}
+      >
+        <Text
+          fontSize="md"
+          color={colors.gray[300]}
+        >
+          Ainda não é um usuário?
+        </Text>
+
+        <Button
+          title="Registrar"
+          w="full"
+          mt={4}
+          isLoading={isLoading}
+          bg={'amber.700'}
+          _pressed={{ bg: "amber.500" }}
+          onPress={handleSignUp}
+        />
+      </VStack>
+
     </VStack>
   )
 }

@@ -1,3 +1,4 @@
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 
 export type OrderFirestoreDTO = {
@@ -7,4 +8,5 @@ export type OrderFirestoreDTO = {
   solution?: string
   created_at: FirebaseFirestoreTypes.Timestamp
   closed_at?: FirebaseFirestoreTypes.Timestamp
+  createdby?: FirebaseAuthTypes.User
 }

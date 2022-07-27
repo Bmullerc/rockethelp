@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Alert } from 'react-native'
 
-import { VStack, Icon, useTheme } from "native-base"
+import { VStack, Icon, useTheme, Heading } from "native-base"
 import auth from '@react-native-firebase/auth'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
@@ -67,7 +67,11 @@ export function SignUp() {
 
   return (
     <VStack flex={1} p={6} bg="gray.600">
-      <Header title="Registro de Usuário" />
+      <Header help title="Registro de Usuário" />
+
+      <Heading color="gray.300" ml={2} mb={4} fontSize="md">
+        E-mail:
+      </Heading>
       <Input
         placeholder="Insira um e-mail válido"
         marginBottom={4}
@@ -75,11 +79,15 @@ export function SignUp() {
         onChangeText={setEmail}
       />
 
+      <Heading color="gray.300" ml={2} mt={4} fontSize="md">
+        Senha (mínimo 6 caracteres):
+      </Heading>
+
       <Input
         placeholder="Senha"
         InputLeftElement={<Icon as={<Key color={colors.gray[300]} />} ml={4} />}
         secureTextEntry
-        mt={8}
+        mt={4}
         onChangeText={setPass1}
       />
 
